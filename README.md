@@ -1,7 +1,7 @@
 # Hostel_Query_Management_System
 
 Check out the live demo at:
-https://covid19appbyanshumaansingh.herokuapp.com/
+http://hostelquerymanagementsystem.infinityfreeapp.com/
 
 Username: Anshumaan Singh
 
