@@ -52,7 +52,7 @@ text-align: center;
     error_reporting(0);
 if($_SESSION["username"]) {
 ?> 
-    <strong>
+    <strong style="color:white;">
 Welcome <?php echo htmlspecialchars($_SESSION["username"]); ?>.  <button id="logout" onclick="myFunction()" class="btn btn-secondary" type="button">Logout</button>
    
     <div class="container">

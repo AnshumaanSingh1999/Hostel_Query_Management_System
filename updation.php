@@ -1,5 +1,6 @@
 <?php
 error_reporting(0);
+
 header("X-XSS-Protection: 1; mode=block");
 session_start();
 
@@ -7,9 +8,11 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "hostel_query_management_system";
-$HandlerName = $_POST["QueryDetails"];
-$SuccessMessage = "Good job your task details have been uploaded.";
-$error = "Field name is empty, Please go back and enter  values and click submit button.";
+$HandlerName = $_POST["TaskName"];
+$Substituteusername = $_SESSION["username"];
+$SuccessMessage = "Good job the problem details have been updated successfully.";
+$error = 0;
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -26,14 +29,34 @@ if(isset($_POST['submit']))
     
   }
 
+$sql = "SELECT query FROM queries WHERE username='$Substituteusername'";
+    $result = $conn->query($sql);
 
-$sql = "INSERT INTO queries (username, date, query)
-VALUES ('".$_SESSION["username"]."','".$_POST["Dated"]."','".$_POST["QueryDetails"]."')";
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        
+        $field1name = $row["query"];
+        
+       
+        
+    }
+} else {
+    $error++;
+    
+    echo  "";
+
+    
+}
+    
+$sql = "UPDATE queries SET query='$HandlerName' WHERE username='$Substituteusername'";
 
 if ($conn->query($sql) === TRUE) {
-  echo " ";
+   
+    
+  echo "";
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  echo "";
 }
 
 echo "<meta http-equiv='refresh' content='2'>";
@@ -55,17 +78,16 @@ $conn->close();
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
         <script src="buttons.js"></script>
         <style>
-            
 
 
             
             .container{
                 text-align: center;
-                margin-top: 150px;
+                margin-top: 30px;
                 width: 320px;
             }
             .margin{
-                margin-top: 20px;
+                margin-top: 2px;
             }
             .centre{
                 text-align: center;
@@ -75,13 +97,13 @@ $conn->close();
                 margin-top: 500px;
             }
             
-    body {
+     body {
 
-         background-image: url(pictures/maxresdefault.jpg);
+         background-image: url(pictures/pexels-mike-1181772.jpg);
     background-repeat: no-repeat;
   background-attachment: fixed; 
   background-size: 100% 100%;
-    background-color: darkgray;
+         background-color: darkgray;
   background-blend-mode:darken;
 }
 
@@ -91,7 +113,7 @@ $conn->close();
         .white{
     color:white;
     text-align: center;
-            margin-top: 50px;
+            margin-top: 150px;
             
  
 }
@@ -109,33 +131,25 @@ $conn->close();
         </style>
     </head>
     <body>
-
-        
 <?php
+    error_reporting(0);
 if($_SESSION["username"]) {
 ?> 
+       
         <strong style="color:white;">
         Welcome <?php echo htmlspecialchars($_SESSION["username"]); ?>.  <button id="logout" onclick="myFunction()" class="btn btn-secondary" type="button">Logout</button></strong>
         <div class="white">
         <div class="container">
-            <h1>Upload Query</h1>
+            <h1>Update Problem</h1>
         <form method="post"  class="margin">
   <fieldset class="form-group">
-    
-      
-<strong><label for="Dated">Dated</label></strong>
-    <input type="text" class="form-control centre" autocomplete="off" id="Dated"  name="Dated" value = "<?php if (array_key_exists('Dated', $_POST)) {
-    echo $_POST['Dated']; 
+    <strong><label for="TaskName">New Query in Detail</label></strong>
+    <input type="text" class="form-control centre" autocomplete="off" id="TaskName"  name="TaskName" value = "<?php if (array_key_exists('TaskName', $_POST)) {
+    echo $_POST['TaskName']; 
     
  }
  ?>">
-      <strong><label for="QueryDetails">Query Details</label></strong>
-    
-    <textarea type="text" class="form-control centre" autocomplete="off" id="QueryDetails"  name="QueryDetails" value = "<?php if (array_key_exists('QueryDetails', $_POST)) {
-    echo $_POST['QueryDetails'];
-    
- }
- ?>"></textarea>
+      
       
       
   </fieldset>
@@ -151,7 +165,7 @@ if($_SESSION["username"]) {
             
             <?php 
               
-              if ($HandlerName) {
+              if ($field1name) {
                   
                   echo '<div class="alert alert-success width centre" role="alert">
   '.$SuccessMessage.'
@@ -160,15 +174,19 @@ if($_SESSION["username"]) {
             
                   
               }
+            elseif ($error == 1){
+                echo '<div class="alert alert-danger width centre" role="alert">Please Enter Valid Query
+</div>';
+            }
               
               ?>
             
 </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>  
-        <?php
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script> 
+
+<?php
 }else header("Location:index.php");
 ?>
-            
     </body>
 </html>

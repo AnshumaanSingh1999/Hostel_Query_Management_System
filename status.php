@@ -111,6 +111,7 @@ $conn->close();
     
     <div class="container white"> 
     <button id="delete" onclick="mynewestFunction3()" class="btn btn-secondary butt"><strong>Delete Queries</strong></button>
+         <button id="update" onclick="mynewestFunction4()" class="btn btn-secondary butt"><strong>Update Queries</strong></button>
    
         </div>
 <?php

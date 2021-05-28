@@ -100,18 +100,17 @@ else{
         </style>
     </head>
     <body>
-        <strong>
         <div class="container">
-            <h1>Login Gateway</h1>
+            <strong><h1>Login Gateway</h1></strong>
         <form method="post"  class="margin" autocomplete="off">
   <fieldset class="form-group">
-    <label for="uname">Enter the UserName</label>
+      <label for="uname"><strong>Enter the UserName</strong></label>
     <input type="text" class="form-control centre" id="city"  name="uname"  value = "<?php if (array_key_exists('uname', $_POST)) {
     echo $_POST['uname']; 
     
  }
  ?>">
-      <label for="pass">Enter the Password</label>
+      <label for="pass"><strong>Enter the Password</strong></label>
     <input type="password" class="form-control centre" id="city"  name="pass"  value = "<?php if (array_key_exists('pass', $_POST)) {
     echo $_POST['pass'];
 }
@@ -122,13 +121,12 @@ else{
   </fieldset>
   
   
-  <button type="submit" class="btn btn-tertiary">Submit</button>
+            <button type="submit" class="btn btn-tertiary"><strong>Submit</strong></button>
 </form>
         
         
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script> 
-            </strong>
     </body>
 </html>

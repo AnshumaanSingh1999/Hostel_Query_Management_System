@@ -19,6 +19,13 @@ btn.addEventListener('click', function() {
 });
 }
 
+function mynewestFunction4() {
+var btn = document.getElementById('update');
+btn.addEventListener('click', function() {
+  document.location.href = 'updation.php';
+});
+}
+
 
 function myFunction() {
 location.replace("logout.php")
